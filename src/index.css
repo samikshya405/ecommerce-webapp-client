@@ -1,0 +1,25 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.navbar{
+  background-color: white !important;
+  color: black !important;
+}
+a{
+  text-decoration: none;
+}
+.productCard:hover{
+  border: 1px solid black;
+}
+.form{
+  width:500px;
+  margin: auto;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.form-wrapper{
+  min-height: 75vh;
+  
+}
