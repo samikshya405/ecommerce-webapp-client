@@ -8,19 +8,38 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ClientLayout from "../../component/layout/ClientLayout";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { setCartItem } from "../../redux/cart/cartSlice";
+import { toast } from "react-toastify";
+import { deleteWishListItem } from "../../redux/wishlist/wishlistSlice";
+import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   const { wishList } = useSelector((state) => state.wishList);
-  const handleDelete = (item)=>{
-
-  }
+  const dispatch = useDispatch()
+  // const [noOfItem, setNoOfItem] = useState(1);
+  const handleDelete = (item) => {
+    dispatch(deleteWishListItem(item))
+  };
+  // const handlePlus = (item) => {
+  //   setNoOfItem(noOfItem+1)
+  // };
+  // const handleMinus = (item) => {
+  //   setNoOfItem(noOfItem-1)
+  // };
+  const handleAdd = (item) => {
+    dispatch(setCartItem({ quantity: 1, ...item }));
+    toast.success(`${item.productName} is added to your cart`, {
+      autoClose: 1000,
+      hideProgressBar: true,
+    });
+  };
   return (
     <ClientLayout>
       <Container maxWidth="md" sx={{ marginTop: "20px" }}>
@@ -38,10 +57,16 @@ const Wishlist = () => {
                     padding={2}
                   >
                     <Box display={"flex"} gap={2} alignItems={"center"}>
-                      <IconButton style={{color:'black'}} onClick={()=>handleDelete(item)}>
+                      <IconButton
+                        style={{ color: "black" }}
+                        onClick={() => handleDelete(item)}
+                      >
                         <DeleteIcon />
                       </IconButton>
+                      <Link to={`/productPage/${item.id}`}>
                       <img width={"100px"} src={item.URL} alt="" />
+                      </Link>
+                      
 
                       <Box>
                         <h3>{item.productName}</h3>
@@ -51,22 +76,30 @@ const Wishlist = () => {
                           borderRadius={1}
                           marginTop={2}
                         >
-                          <IconButton>
-                            <RemoveIcon />
-                          </IconButton>
-                          <IconButton>1</IconButton>
-                          <IconButton>
+                          {/* {noOfItem <= 1 ? (
+                            <IconButton disabled>
+                              <RemoveIcon />
+                            </IconButton>
+                          ) : (
+                            <IconButton onClick={()=>handleMinus(item)}>
+                              <RemoveIcon />
+                            </IconButton>
+                          )}
+                          <IconButton>{noOfItem}</IconButton>
+                          <IconButton onClick={()=>handlePlus(item)}>
                             <AddIcon />
-                          </IconButton>
+                          </IconButton> */}
                         </Box>
                       </Box>
                     </Box>
                     <Box>
                       <Typography marginBottom={2}>${item.price}</Typography>
-                      <IconButton style={{color:'black', fontSize:'45px'}} onClick={()=>handleAdd(item)}>
-                        <ShoppingCartCheckoutIcon/>
+                      <IconButton
+                        style={{ color: "black", fontSize: "45px" }}
+                        onClick={() => handleAdd(item)}
+                      >
+                        <ShoppingCartCheckoutIcon />
                       </IconButton>
-                      
                     </Box>
                   </Box>
                 </Paper>
@@ -74,7 +107,7 @@ const Wishlist = () => {
             })}
           </Stack>
         ) : (
-          <h1>Your cart is empty</h1>
+          <h1>Your WishList is empty</h1>
         )}
       </Container>
     </ClientLayout>

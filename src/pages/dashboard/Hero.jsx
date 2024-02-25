@@ -17,15 +17,18 @@ export default function Hero() {
     const img = [
         {
             url:'https://m.media-amazon.com/images/I/61lwJy4B8PL._SX3000_.jpg',
-            navigate:'/'
+            navigate:'/',
+            name:'kitchen product'
         },
         {
             url:'https://m.media-amazon.com/images/I/61zAjw4bqPL._SX3000_.jpg',
-            navigate:'/'
+            navigate:'/',
+            name:'beauty product'
         },
         {
             url:'https://m.media-amazon.com/images/I/71EinHErCtL._SX3000_.jpg',
-            navigate:'/'
+            navigate:'/',
+            name:'school product'
         },
         
     ]
@@ -38,7 +41,7 @@ export default function Hero() {
         autoplay={{ delay: 3000 }} className="mySwiper">
             {
                 img.map(image=>{
-                    return <SwiperSlide>
+                    return <SwiperSlide key={image.name}>
                     <Link to={image.navigate}>
                     <Box 
                     sx={{

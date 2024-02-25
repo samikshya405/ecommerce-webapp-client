@@ -11,7 +11,7 @@ import { setCartItem } from "../../redux/cart/cartSlice";
 import { toast } from "react-toastify";
 
 
-export default function ProductCard({ id, URL, productName, price }) {
+export default function ProductCard({ id, image, productName, price }) {
   const { productList } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ export default function ProductCard({ id, URL, productName, price }) {
         <CardMedia
           component="img"
           height="194"
-          image={URL}
+          image={image}
           alt={productName}
           sx={{ objectFit: "contain" }}
         />

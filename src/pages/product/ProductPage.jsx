@@ -84,7 +84,7 @@ const ProductPage = () => {
           alignItems="center"
         >
           <Grid item xs={12} sm={12} md={6} lg={6}>
-            <img style={{ width: "70%" }} src={selectedProduct.URL} alt="" />
+            <img style={{ width: "70%" }} src={selectedProduct.image} alt="" />
           </Grid>
           <Grid
             item

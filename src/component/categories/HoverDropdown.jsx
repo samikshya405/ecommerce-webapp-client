@@ -1,39 +1,53 @@
-import React, { useState } from 'react';
-
-// import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Button, ClickAwayListener, Menu, MenuItem, MenuList, Paper } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import React, { useEffect, useState } from 'react';
+import { Button, Menu, MenuItem } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategoryAction, getCategorySubCollection } from '../../redux/category/categoryAction';
+import { Link } from 'react-router-dom';
 
 function HoverDropdown() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [subMenuAnchorEl, setSubMenuAnchorEl] = useState(null);
+  const {categoryList, selectedCategoryCollection} = useSelector(state=>state.category);
+  const [selectedCategory, setSelectedCategory] = useState({})
+  const dispatch = useDispatch()
 
-  const handleOpen = (event) => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleSubMenuClick = ( event,category) => {
+    setSubMenuAnchorEl(event.currentTarget)
+    
+    setSelectedCategory(category)
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    
   };
 
-  const handleSubMenuOpen = (event) => {
-    setSubMenuAnchorEl(event.currentTarget);
-  };
+  
+  useEffect(()=>{
+    dispatch(getCategoryAction())
 
-  const handleSubMenuClose = () => {
-    setSubMenuAnchorEl(null);
-  };
+
+  },[categoryList])
+  useEffect(()=>{
+    if(selectedCategory.id){
+      dispatch(getCategorySubCollection(selectedCategory.id))
+    }
+
+  },[selectedCategory])
 
   return (
     <div>
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
-        onClick={handleOpen}
+        onClick={handleClick}
         sx={{color:'black'}}
       >
-        Categories <ArrowDropDownIcon/>
+        Categories
       </Button>
       <Menu
         id="simple-menu"
@@ -41,38 +55,24 @@ function HoverDropdown() {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        onMouseLeave={handleClose}
+        
+
       >
-        <MenuItem onClick={handleSubMenuOpen}>Option 1 <ChevronRightIcon/></MenuItem>
-        <Menu
-          id="submenu"
-          anchorEl={subMenuAnchorEl}
-          open={Boolean(subMenuAnchorEl)}
-          onClose={handleSubMenuClose}
-          onMouseLeave={handleSubMenuClose}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-        >
-          <Paper>
-            <ClickAwayListener onClickAway={handleSubMenuClose}>
-              <MenuList>
-                <MenuItem onClick={handleSubMenuClose}>Submenu Item 1</MenuItem>
-                <MenuItem onClick={handleSubMenuClose}>Submenu Item 2</MenuItem>
-                <MenuItem onClick={handleSubMenuClose}>Submenu Item 3</MenuItem>
-              </MenuList>
-            </ClickAwayListener>
-          </Paper>
-        </Menu>
-        <MenuItem onClick={handleClose}>Option 2</MenuItem>
-        <MenuItem onClick={handleClose}>Option 3</MenuItem>
+        <Link to='/allProduct'>
+        <MenuItem>All product</MenuItem>
+        </Link>
+        
+        {
+          categoryList.map(category=>{
+            return <Link key={category.id} to={`/category/${category.name}`} style={{color:'black'}}><MenuItem sx={{textTransform:'capitalize'}} onClick={(e)=>handleSubMenuClick(e,category)}>{category.name}</MenuItem></Link>
+          })
+        }
+        
       </Menu>
+     
+
+      
+      
     </div>
   );
 }

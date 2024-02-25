@@ -10,6 +10,7 @@ export const getProductAction = () => async (dispatch) => {
 
       productList.push({ id, ...doc.data() });
     });
+    
     dispatch(setProductList(productList));
   } catch (error) {
     console.log(error);

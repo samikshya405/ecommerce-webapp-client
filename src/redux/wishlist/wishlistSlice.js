@@ -18,9 +18,11 @@ export const wishListSlice = createSlice({
             
         },
         deleteWishListItem:(state, action)=>{
+            const itemIndex = state.wishList.findIndex(item=>item.id==action.payload.id)
+            state.wishList.splice(itemIndex,1)
             
         }
     }
 })
-export const {setWishList} = wishListSlice.actions
+export const {setWishList, deleteWishListItem} = wishListSlice.actions
 export default wishListSlice.reducer

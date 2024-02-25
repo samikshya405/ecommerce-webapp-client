@@ -15,6 +15,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartItem, setCartItem } from "../../redux/cart/cartSlice";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cartItem } = useSelector((state) => state.cart);
@@ -61,7 +62,9 @@ const Cart = () => {
                         padding={2}
                       >
                         <Box display={"flex"} gap={2} alignItems={"center"}>
-                          <img width={"100px"} src={item.URL} alt="" />
+                          <Link to={`/productPage/${item.id}`}>
+                          <img width={"100px"} src={item.image} alt="" />
+                          </Link>
 
                           <Box>
                             <h3>{item.productName}</h3>
