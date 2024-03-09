@@ -54,7 +54,7 @@ const Cart = () => {
                   <Typography align="right">Incl gst</Typography>
                   <Box align="right">
                     {userInfo.uid ? (
-                      <Link to='/checkout'>
+                      <Link to="/checkout">
                         <Button
                           variant="contained"
                           style={{ background: "black" }}

@@ -19,7 +19,7 @@ export default function Hero() {
         {
             url:'https://allyfashion.com/cdn/shop/files/Homepage_Desktop_NEW_copy_a861e730-ae03-4864-a398-1cae7bf4b05b_1900x.jpg?v=1709250334',
             navigate:'/category/women clothing',
-            name:'beauty product'
+            name:'beauty '
         },
         {
             url:'https://kyliecosmetics.com/cdn/shop/files/0307_Fragrance_Desktop_find-your-fit_1728x600-ratio.jpg?crop=center&height=1077&v=1709659207&width=1920',

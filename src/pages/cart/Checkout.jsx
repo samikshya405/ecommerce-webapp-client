@@ -1,53 +1,21 @@
-import React, { useState, useEffect } from "react";
-// import "./App.css";
-
-const ProductDisplay = () => (
-  <section>
-    <div className="product">
-      <img
-        src="https://i.imgur.com/EHyR2nP.png"
-        alt="The cover of Stubborn Attachments"
-      />
-      <div className="description">
-      <h3>Stubborn Attachments</h3>
-      <h5>$20.00</h5>
-      </div>
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
+const Checkout = () => {
+  const stripePromise = loadStripe(import.meta.env.VITE_PUBLISABLE_KEY);
+  const options = {
+    mode: "payment",
+    amount: 100,
+    currency: "aud",
+    // clientSecret: import.meta.env.VITE_SECRET_KEY,
+  };
+  return (
+    <div>
+      <Elements stripe={stripePromise} options={options}>
+        <CheckoutForm />
+      </Elements>
     </div>
-    <form action="/create-checkout-session" method="POST">
-      <button type="submit">
-        Checkout
-      </button>
-    </form>
-  </section>
-);
-
-const Message = ({ message }) => (
-  <section>
-    <p>{message}</p>
-  </section>
-);
-
-export default function Checkout() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-
-    if (query.get("success")) {
-      setMessage("Order placed! You will receive an email confirmation.");
-    }
-
-    if (query.get("canceled")) {
-      setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, []);
-
-  return message ? (
-    <Message message={message} />
-  ) : (
-    <ProductDisplay />
   );
-}
+};
+
+export default Checkout;

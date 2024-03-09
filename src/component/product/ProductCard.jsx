@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCartItem } from "../../redux/cart/cartSlice";
 import { toast } from "react-toastify";
 import ProductModal from "./ProductModal";
+import styled from "@emotion/styled";
 
 export default function ProductCard({ id, image, productName, price, sizes }) {
   const { productList } = useSelector((state) => state.product);
@@ -48,7 +49,12 @@ export default function ProductCard({ id, image, productName, price, sizes }) {
             sx={{ objectFit: "contain" }}
           />
           <CardContent>
-            <Typography textTransform={"capitalize"}>{productName}</Typography>
+            <Typography textTransform={"capitalize"} sx={{
+              whiteSpace: 'nowrap', 
+              overflow: 'hidden',
+              textOverflow: 'ellipsis', 
+              
+            }}>{productName}</Typography>
             <Box display={"flex"} justifyContent={"space-between"}>
               <Typography style={{ fontWeight: "600", paddingTop: "10px" }}>
                 ${price}

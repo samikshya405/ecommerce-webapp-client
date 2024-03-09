@@ -10,6 +10,7 @@ import BannerTwo from './BannerTwo'
 import Footer from '../../component/layout/Footer'
 import Hero from './Hero'
 import CategoryBanner from '../../component/categories/CategoryBanner'
+import ClientLayout from '../../component/layout/ClientLayout'
 
 
 
@@ -23,7 +24,8 @@ const Dashboard = () => {
   },[dispatch])
   return (
     <>
-    <Header/>
+    <ClientLayout>
+    
     
    <Hero/>
    <CategoryBanner/>
@@ -32,7 +34,7 @@ const Dashboard = () => {
     <TopSelling/>
     <BannerTwo/>
 
-    <Footer/>
+    </ClientLayout>
     
 
     </>

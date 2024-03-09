@@ -1,0 +1,67 @@
+
+.AppBar{
+    position: relative;
+    z-index: 1000;
+}
+.categories-bar {
+    width: 100%;
+    
+    overflow-x: scroll; /* Always show scrollbar */
+    white-space: nowrap;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none;
+    display: flex;
+    /* justify-content: center; */
+    text-transform: capitalize;
+    padding: 0 10px;
+  }
+  
+  .categories-bar::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+  
+  .categories-container {
+    display: flex;
+  }
+  
+  .categories-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    /* padding: 0 20px; */
+  }
+  
+  .category-item {
+    padding: 10px;
+    margin: 0 5px;
+    
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .categories-title{
+    display: flex;
+    align-items: center;
+  }
+  .subcategory-container {
+    position: absolute;
+    bottom: -70px; /* Adjust as needed */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: white;
+    
+  }
+  
+  .subcategory-item {
+    text-align: center;
+  }
+  
+  .subcategory-item img {
+    width: 50px; /* Adjust image size as needed */
+    height: 50px;
+    
+  }
+  
