@@ -38,7 +38,7 @@ const CategoryBanner = () => {
       <Grid container spacing={5}>
         {categoryList.map((category) => {
           return (
-            <Grid key={category.id} item xs={3} sm={3} md={2.4} lg={2.4} xl={2}>
+            <Grid key={category.id} item xs={3} sm={3} md={2.4} lg={2.4} xl={2.4}>
               <Link to={`/category/${category.name}`}>
                 <Paper className="cat"
                   sx={{
@@ -75,12 +75,11 @@ const CategoryBanner = () => {
         })}
         {subCat.map((category) => {
           return (
-            <Grid key={category.id} item xs={3} sm={3} md={2.4} lg={2.4} xl={2}>
+            <Grid key={category.id} item xs={3} sm={3} md={2.4} lg={2.4} xl={2.4}>
               <Link to={`/category/${category.name}`}>
                 <Paper
                   sx={{
                     width: "100%",
-                    borderRadius: "50%",
                     height: 0,
                     paddingBottom: "100%", // Set height to match width to make it a perfect square
                     borderRadius: "50%",
@@ -90,8 +89,6 @@ const CategoryBanner = () => {
                   <img
                     style={{
                       width: "100%",
-                      // height:'100%',
-
                       objectFit: "contain",
                     }}
                     src={category.categoryImage}

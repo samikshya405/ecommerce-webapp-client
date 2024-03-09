@@ -35,9 +35,7 @@ const CategoriesBar = ({ categories }) => {
       <div className="categories-container">
         <ul className="categories-list">
           <li className="category-item categories-title">
-            {/* Categories */}
-            <HoverDropdown /> 
-            {/* <ArrowDropDownIcon /> */}
+            <HoverDropdown />
           </li>
           {categories.map((category) => (
             <li
@@ -53,14 +51,20 @@ const CategoriesBar = ({ categories }) => {
                   {selectedCategoryCollection.map((subcategory) => (
                     <Link to="" key={subcategory.id}>
                       <div className="subcategory-item">
-                        <Paper className="subcatImageWrapper">
-                          <img
-                            src={subcategory.categoryImage}
-                            alt={subcategory.name}
-                          />
-                        </Paper>
-                        <div>{subcategory.name}</div>
+                      <Paper
+                        className="subcatImageWrapper"
+                        
+                      >
+                        <img
+                          src={subcategory.categoryImage}
+                          alt={subcategory.name}
+                          
+                        />
+                        
+                      </Paper>
+                      <div>{subcategory.name}</div>
                       </div>
+                     
                     </Link>
                   ))}
                 </Paper>
