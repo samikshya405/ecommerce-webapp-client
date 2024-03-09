@@ -15,6 +15,8 @@ import { Link } from "react-router-dom";
 
 import CartproductCard from "./CartproductCard";
 import EmptyCart from "./EmptyCart";
+import Footer from "../../component/layout/Footer";
+import CartHeader from "./CartHeader";
 
 const Cart = () => {
   const { cartItem } = useSelector((state) => state.cart);
@@ -25,6 +27,7 @@ const Cart = () => {
 
   return (
     <ClientLayout>
+    
       <Container maxWidth="lg" sx={{ marginTop: "10vh" }}>
         {cartItem.length > 0 ? (
           <Grid container spacing={3}>
@@ -59,7 +62,7 @@ const Cart = () => {
                           variant="contained"
                           style={{ background: "black" }}
                         >
-                          PayNow
+                          Checkout Now
                         </Button>
                       </Link>
                     ) : (
@@ -81,6 +84,7 @@ const Cart = () => {
           <EmptyCart />
         )}
       </Container>
+   
     </ClientLayout>
   );
 };

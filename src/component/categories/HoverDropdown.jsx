@@ -3,6 +3,8 @@ import { Box, Button, Menu, MenuItem } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoryAction, getCategorySubCollection } from '../../redux/category/categoryAction';
 import { Link } from 'react-router-dom';
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"; // Import your CSS file for styling
+
 
 function HoverDropdown() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -41,14 +43,14 @@ function HoverDropdown() {
 
   return (
     <div>
-      <Button
+      <li
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        sx={{color:'black'}}
+        style={{display:'flex', alignItems:'center'}}
       >
-        Categories
-      </Button>
+        Categories <ArrowDropDownIcon/>
+      </li>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}

@@ -45,13 +45,13 @@
   }
   .subcategory-container {
     position: absolute;
-    bottom: -70px; /* Adjust as needed */
+    bottom: -118px; /* Adjust as needed */
     left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     gap: 20px;
-    background: white;
+    
     
   }
   
@@ -59,9 +59,21 @@
     text-align: center;
   }
   
+ 
+  
+  .subcatImageWrapper {
+    width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;/* This ensures the image stays within the circular boundary */
+  }
   .subcategory-item img {
-    width: 50px; /* Adjust image size as needed */
-    height: 50px;
+    padding-top: 20px;
+    width: 100%; /* Adjust image size as needed */
+    height: 100%;
+    object-fit: cover;
     
   }
-  

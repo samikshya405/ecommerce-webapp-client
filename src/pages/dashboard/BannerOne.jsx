@@ -44,7 +44,8 @@ const BannerOne = () => {
             <img
               src="https://media.istockphoto.com/id/1136422297/photo/face-cream-serum-lotion-moisturizer-and-sea-salt-among-bamboo-leaves.jpg?b=1&s=612x612&w=0&k=20&c=TAn7PO0GwGVQ6zeKyACdroy50orO90AlbxtnECt9Tho="
               alt="img"
-              style={{ height: "100%", objectFit: "cover" }}
+              style={{ height: "100%", objectFit: "cover" ,
+            width:'100%'}}
             />
           </Grid>
         </Grid>

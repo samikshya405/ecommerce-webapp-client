@@ -41,13 +41,10 @@ const CartproductCard = ({ item }) => {
   const handleChangeSize = (e) => {
     setSelectedSize(e.target.value);
     const { selectedsize, ...restInfo } = item;
-    dispatch(setCartItem({selectedsize:selectedSize, ...restInfo}))
-
-    
-
+    dispatch(setCartItem({ selectedsize: selectedSize, ...restInfo }));
   };
   return (
-    <Paper key={item.id}>
+    <Box key={item.id}>
       <Box
         display={"flex"}
         justifyContent={"space-between"}
@@ -60,42 +57,25 @@ const CartproductCard = ({ item }) => {
           </Link>
 
           <Box>
-            <h3 style={{textTransform:'capitalize'}}>{item.productName}</h3>
-            
+            <h3 style={{ textTransform: "capitalize" }}>{item.productName}</h3>
+
             {item.selectedsize && (
-                <>
-                <br/>
-              {/* <Select
-                labelId="select-label"
-                id="select"
-                value={selectedSize}
-                onChange={handleChangeSize}
-                sx={{
-                   
-                    height:30
-                }}
-              >
-                {item.sizes.map((sizeStock) => {
-                  return (
-                    <MenuItem key={sizeStock.size} value={sizeStock.size}>
-                      {sizeStock.size}
-                    </MenuItem>
-                  );
-                })}
-              </Select> */}
-              <Typography><span style={{fontWeight:'bold'}}>Size:</span>{selectedSize}</Typography>
-              <br/>
+              <>
+                <br />
+
+                <Typography>
+                  <span style={{ fontWeight: "bold" }}>Size:</span>
+                  {selectedSize}
+                </Typography>
+                <br />
               </>
             )}
-            
 
             <Box
               border={1}
               display="inline-block"
               borderRadius={1}
               marginTop={2}
-             
-              
             >
               {item.quantity == 1 ? (
                 <IconButton disabled>
@@ -126,7 +106,7 @@ const CartproductCard = ({ item }) => {
           </IconButton>
         </Box>
       </Box>
-    </Paper>
+    </Box>
   );
 };
 
