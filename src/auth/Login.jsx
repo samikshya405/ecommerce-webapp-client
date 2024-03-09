@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CustomInput from "../component/input/CustomInput";
 import ClientLayout from "../component/layout/ClientLayout";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfoAction } from "../redux/auth/authAction";
 
 const inputs = [
   { name: "email", label: "Email", type: "email", required: true },
@@ -14,6 +19,10 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const dispatch = useDispatch()
+  const {userInfo} = useSelector(state=>state.auth)
+  const navigate = useNavigate()
+  const location = useLocation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +32,36 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formData;
+    try{
+      const signInPromise = signInWithEmailAndPassword(auth, email, password)
+      toast.promise(signInPromise, {
+        pending: "In progress..."
+      });
+      const userCredential = await signInPromise
+      const {user} = userCredential
+      dispatch(getUserInfoAction(user.uid))
+      toast('logged in')
+
+    }catch(error){
+      const errorCode = error.code
+      if(errorCode.includes("auth/invalid-credential")){
+        toast.error("Invalid email or password!");
+      }
+
+    }
   };
+  useEffect(()=>{
+    if(userInfo.uid){
+      if(location.state?.path){
+        navigate(location.state.path);
+
+      }else{
+        navigate('/')
+      }
+    }
+
+
+  },[userInfo])
 
   return (
     <>

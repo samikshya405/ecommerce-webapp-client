@@ -5,9 +5,10 @@ import { toast } from "react-toastify";
 import CustomInput from "../component/input/CustomInput";
 import ClientLayout from "../component/layout/ClientLayout";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { useDispatch } from "react-redux";
-import { getUserInfoAction } from "../redux/auth/authAction";
+// import { getUserInfoAction } from "../redux/auth/authAction";
+import { doc, setDoc } from "firebase/firestore";
 
 const inputs = [
   { name: "fullName", label: "Full Name", type: "text", required: true },
@@ -20,16 +21,11 @@ const inputs = [
     required: true,
   },
 ];
-const initialstate = {
-  fullName: "",
-  phone: "",
-  email: "",
-  password: "",
-  
-};
+
 const Signup = () => {
-  const [formData, setformData] = useState(initialstate);
-  const dispatch = useDispatch()
+  const [formData, setformData] = useState({ role: "customers" });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,18 +36,28 @@ const Signup = () => {
     const { password, ...restFormData } = formData;
     const { email } = formData;
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-      const {user} = userCredential
-      console.log(user.uid)
-      dispatch(getUserInfoAction(user.uid))
-      setformData(initialstate)
-      toast('account created')
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const { uid } = userCredential.user;
 
+      await setDoc(doc(db, "users", uid), {
+        ...restFormData,
+        uid,
+      });
+
+      navigate("/login");
+
+      toast("account created");
     } catch (error) {
-      if(errorCode.includes("auth/email-already-in-use")) {
+      const errorCode = error.code;
+
+      if (errorCode.includes("auth/email-already-in-use")) {
         toast.error("Account already exists!");
       } else {
-        toast.error(error.message);
+        console.log(error)
       }
     }
   };
@@ -68,7 +74,6 @@ const Signup = () => {
                   <CustomInput
                     key={input.name}
                     {...input}
-                    value = {formData[input.name]}
                     onChange={handleChange}
                   />
                 );

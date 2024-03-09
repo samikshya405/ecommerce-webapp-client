@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Menu, MenuItem } from '@mui/material';
+import { Box, Button, Menu, MenuItem } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoryAction, getCategorySubCollection } from '../../redux/category/categoryAction';
 import { Link } from 'react-router-dom';
@@ -31,7 +31,7 @@ function HoverDropdown() {
     dispatch(getCategoryAction())
 
 
-  },[categoryList])
+  },[])
   useEffect(()=>{
     if(selectedCategory.id){
       dispatch(getCategorySubCollection(selectedCategory.id))
@@ -74,6 +74,7 @@ function HoverDropdown() {
       
       
     </div>
+    
   );
 }
 

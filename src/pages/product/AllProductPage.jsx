@@ -7,6 +7,7 @@ import { getProductAction } from "../../redux/product/productAction";
 import { Button, Container } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from "react-router-dom";
+import Breadcrumb from "../../component/breadcrumb/Breadcrumb";
 
 const AllProductPage = () => {
   const {productList} = useSelector(state=>state.product)
@@ -18,6 +19,7 @@ const AllProductPage = () => {
   return (
     <ClientLayout>
       <Container sx={{mt:4}}>
+        
         <Link to='/'>
         <Button sx={{marginBottom:'10px'}}> <ArrowBackIcon/>  Back to home</Button>
         </Link>

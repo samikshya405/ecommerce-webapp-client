@@ -18,6 +18,9 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { ShoppingCart } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import HoverDropdown from "../categories/HoverDropdown";
+import { auth } from "../../firebase";
+import { setUserInfo } from "../../redux/auth/authSlice";
+import { toast } from "react-toastify";
 
 
 const Header = () => {
@@ -25,6 +28,7 @@ const Header = () => {
   const {cartItem} = useSelector(state=>state.cart)
   const {wishList} = useSelector(state=>state.wishList)
   const [searchValue, setSearchValue] = useState("");
+  const {userInfo} = useSelector(state=>state.auth)
   const navigate = useNavigate();
   const numberOfItemsincart =cartItem.reduce((a,b)=>{
     return a + b.quantity
@@ -35,6 +39,14 @@ const Header = () => {
   const handleSignin = () => {
     navigate("/login");
   };
+  const handleSignout=()=>{
+    signOut(auth).then(() => {
+      dispatch(setUserInfo({}));
+    }).catch((error) => {
+      toast.error(error.message)
+    });
+
+  }
   return (
     <AppBar position="sticky" className="navbar">
       <Container maxWidth="lg">
@@ -56,6 +68,8 @@ const Header = () => {
               shop
             </Button>
             <HoverDropdown />
+            {/* <Button>Categories</Button> */}
+
           </Box>
 
           <Searchbar placeholder="Search..." onChange={handleSearchChange} />
@@ -76,11 +90,19 @@ const Header = () => {
                 <FavoriteBorderIcon />
               </Badge>
             </IconButton>
-
-            <Button color="inherit" sx={{textTransform:'capitalize'}} onClick={handleSignin}>
+            {
+              userInfo.uid ? (<Button color="inherit" sx={{textTransform:'capitalize'}} onClick={handleSignout}>
               <PersonIcon/>
-              login
+              signOut
+            </Button>):(
+              <Button color="inherit" sx={{textTransform:'capitalize'}} onClick={handleSignin}>
+              <PersonIcon/>
+              login/signup
             </Button>
+            )
+            }
+
+            
           </Stack>
         </Toolbar>
       </Container>

@@ -20,10 +20,9 @@ const BannerOne = () => {
             lg={6}
             sx={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
-            <h1>New year, new home range</h1>
+            <h1>Unlock Your Beauty Potential</h1>
             <h4>
-              Style your home, your way with our latest range of décor,
-              furniture, and more. All at our famously low prices.
+            Revamp your skincare and makeup routine with our latest range of beauty products, including skincare essentials, makeup must-haves, and more. Discover high-quality products at unbeatable prices, designed to help you look and feel your best."
             </h4>
             <div>
               <Button
@@ -43,7 +42,7 @@ const BannerOne = () => {
             style={{ height: "400px", maxHeight: "50vh" }}
           >
             <img
-              src="https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=800"
+              src="https://media.istockphoto.com/id/1136422297/photo/face-cream-serum-lotion-moisturizer-and-sea-salt-among-bamboo-leaves.jpg?b=1&s=612x612&w=0&k=20&c=TAn7PO0GwGVQ6zeKyACdroy50orO90AlbxtnECt9Tho="
               alt="img"
               style={{ height: "100%", objectFit: "cover" }}
             />

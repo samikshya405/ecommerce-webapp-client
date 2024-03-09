@@ -9,6 +9,7 @@ import TopSelling from './TopSelling'
 import BannerTwo from './BannerTwo'
 import Footer from '../../component/layout/Footer'
 import Hero from './Hero'
+import CategoryBanner from '../../component/categories/CategoryBanner'
 
 
 
@@ -25,6 +26,7 @@ const Dashboard = () => {
     <Header/>
     
    <Hero/>
+   <CategoryBanner/>
     <LatestArrival/>
     <BannerOne/>
     <TopSelling/>

@@ -21,9 +21,9 @@ const BannerTwo = () => {
             style={{ height: "400px", maxHeight: "50vh" }}
           >
             <img
-              src="https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=800"
+              src="https://images.pexels.com/photos/1144834/pexels-photo-1144834.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               alt="img"
-              style={{ height: "100%",width:'100%' ,objectFit: "cover" }}
+              style={{ height: "100%",width:'100%' ,objectFit: "contain" }}
             />
           </Grid>
           <Grid
@@ -34,10 +34,9 @@ const BannerTwo = () => {
             lg={6}
             sx={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
-            <h1>New year, new home range</h1>
+            <h1>Refresh Your Wardrobe, Renew Your Style!</h1>
             <h4>
-              Style your home, your way with our latest range of décor,
-              furniture, and more. All at our famously low prices.
+            Elevate your fashion game with our latest collection of apparel, accessories, and more. Explore trendy pieces and timeless classics, all at unbeatable prices. Embrace your unique style and make a statement without breaking the bank.
             </h4>
             <div>
               <Button

@@ -19,6 +19,7 @@ import { setCartItem } from "../../redux/cart/cartSlice";
 import { toast } from "react-toastify";
 import { deleteWishListItem } from "../../redux/wishlist/wishlistSlice";
 import { Link } from "react-router-dom";
+import EmptyWishList from "./EmptyWishList";
 
 const Wishlist = () => {
   const { wishList } = useSelector((state) => state.wishList);
@@ -64,32 +65,13 @@ const Wishlist = () => {
                         <DeleteIcon />
                       </IconButton>
                       <Link to={`/productPage/${item.id}`}>
-                      <img width={"100px"} src={item.URL} alt="" />
+                      <img width={"100px"} src={item.image} alt={item.productName} />
                       </Link>
                       
 
                       <Box>
-                        <h3>{item.productName}</h3>
-                        <Box
-                          border={1}
-                          display="inline-block"
-                          borderRadius={1}
-                          marginTop={2}
-                        >
-                          {/* {noOfItem <= 1 ? (
-                            <IconButton disabled>
-                              <RemoveIcon />
-                            </IconButton>
-                          ) : (
-                            <IconButton onClick={()=>handleMinus(item)}>
-                              <RemoveIcon />
-                            </IconButton>
-                          )}
-                          <IconButton>{noOfItem}</IconButton>
-                          <IconButton onClick={()=>handlePlus(item)}>
-                            <AddIcon />
-                          </IconButton> */}
-                        </Box>
+                        <h3 style={{textTransform:'capitalize'}}>{item.productName}</h3>
+                        
                       </Box>
                     </Box>
                     <Box>
@@ -107,7 +89,7 @@ const Wishlist = () => {
             })}
           </Stack>
         ) : (
-          <h1>Your WishList is empty</h1>
+          <EmptyWishList/>
         )}
       </Container>
     </ClientLayout>

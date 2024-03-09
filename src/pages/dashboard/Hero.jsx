@@ -15,26 +15,27 @@ import { Link } from 'react-router-dom';
 
 export default function Hero() {
     const img = [
+        
         {
-            url:'https://m.media-amazon.com/images/I/61lwJy4B8PL._SX3000_.jpg',
-            navigate:'/',
-            name:'kitchen product'
-        },
-        {
-            url:'https://m.media-amazon.com/images/I/61zAjw4bqPL._SX3000_.jpg',
-            navigate:'/',
+            url:'https://allyfashion.com/cdn/shop/files/Homepage_Desktop_NEW_copy_a861e730-ae03-4864-a398-1cae7bf4b05b_1900x.jpg?v=1709250334',
+            navigate:'/category/women clothing',
             name:'beauty product'
         },
         {
-            url:'https://m.media-amazon.com/images/I/71EinHErCtL._SX3000_.jpg',
-            navigate:'/',
-            name:'school product'
+            url:'https://kyliecosmetics.com/cdn/shop/files/0307_Fragrance_Desktop_find-your-fit_1728x600-ratio.jpg?crop=center&height=1077&v=1709659207&width=1920',
+            navigate:'/category/beauty products',
+            name:'fragnanc'
+        },
+        {
+            url:"https://m.media-amazon.com/images/I/61zAjw4bqPL._SX3000_.jpg",
+            navigate:'/category/beauty products',
+            name:'beauty product'
         },
         
     ]
   return (
     <>
-    <Container sx={{marginTop:'5vh'}}>
+    <Container sx={{marginTop:'5vh'}} maxWidth="xl">
 
     
       <Swiper navigation={true} modules={[Navigation, Autoplay]} // Include the Autoplay module
@@ -46,8 +47,9 @@ export default function Hero() {
                     <Box 
                     sx={{
                         height: '65vh',
-                        display: 'block',
+                        // display: 'block',
                         backgroundSize:'cover',
+                        backgroundRepeat:'no-repeat',
                         overflow: 'hidden',
                         width: '100%',
                         backgroundImage:`URL(${image.url})`,
@@ -55,8 +57,7 @@ export default function Hero() {
                         display:'flex',
                         justifyContent:'center'
                       }}
-                    // src='https://m.media-amazon.com/images/I/61lwJy4B8PL._SX3000_.jpg'
-                    // alt=''
+                    
                     >
                         <Button sx={{
                             position:'absolute',

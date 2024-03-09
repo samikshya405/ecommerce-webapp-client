@@ -11,7 +11,7 @@ const CategoryPage = () => {
     const {productList} = useSelector(state=>state.product)
     const dispatch = useDispatch()
 
-    const selectedProductList = productList.filter(product=>product.category ===id)
+    const selectedProductList = productList.filter(product=>product.category ===id || product.subcategory ===id)
 
     useEffect(()=>{
         dispatch(getProductAction())

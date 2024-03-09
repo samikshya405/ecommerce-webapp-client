@@ -11,14 +11,14 @@ const persistConfig = {
     key: 'root',
     storage,
   };
+  const persistAuthReducer = persistReducer(persistConfig, authReducer)
   const persistedCartReducer = persistReducer(persistConfig, cartReducer);
   const perisitedWishlistReducer = persistReducer(persistConfig, wishlistReducer )
 export const store = configureStore({
     reducer:{
-        auth:authReducer,
+        auth:persistAuthReducer,
         product:productReducer,
         cart:persistedCartReducer,
-        // cart: cartReducer,
         wishList:perisitedWishlistReducer,
         category:categoryReducer
         
