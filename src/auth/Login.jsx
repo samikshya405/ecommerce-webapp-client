@@ -40,7 +40,7 @@ const Login = () => {
       const userCredential = await signInPromise
       const {user} = userCredential
       dispatch(getUserInfoAction(user.uid))
-      toast('logged in')
+      // toast('logged in')
 
     }catch(error){
       const errorCode = error.code
@@ -52,8 +52,9 @@ const Login = () => {
   };
   useEffect(()=>{
     if(userInfo.uid){
-      if(location.state?.path){
-        navigate(location.state.path);
+      if(location.state?.path && location.state?.path==='/cart'){
+        
+        navigate('/checkout');
 
       }else{
         navigate('/')

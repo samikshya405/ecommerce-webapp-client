@@ -43,6 +43,7 @@ function HoverDropdown() {
 
   return (
     <div>
+      <ul>
       <li
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -51,12 +52,14 @@ function HoverDropdown() {
       >
         Categories <ArrowDropDownIcon/>
       </li>
+      </ul>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        sx={{width:'900px'}}
         
 
       >

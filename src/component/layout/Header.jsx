@@ -72,11 +72,10 @@ const Header = () => {
             >
               fashion
             </Button>
-            {/* <HoverDropdown /> */}
-            {/* <Button>Categories</Button> */}
+          
           </Box>
 
-          {/* <Searchbar placeholder="Search..." onChange={handleSearchChange} /> */}
+          
 
           <Stack direction={"row"} spacing={1}>
             <IconButton

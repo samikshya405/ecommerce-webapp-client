@@ -45,7 +45,7 @@
   }
   .subcategory-container {
     position: absolute;
-    bottom: -118px; /* Adjust as needed */
+    bottom: -138px; /* Adjust as needed */
     left: 0;
     width: 100%;
     display: flex;
@@ -63,6 +63,8 @@
   
   .subcategory-item {
     text-align: center;
+    padding-bottom: 20px;
+    /* padding-top: -20px; */
   }
   
  
@@ -75,6 +77,7 @@
   justify-content: center;
   border-radius: 50%;
   overflow: hidden;
+  
   
   }
   .subcategory-item img {

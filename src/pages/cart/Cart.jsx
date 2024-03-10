@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClientLayout from "../../component/layout/ClientLayout";
 import {
   Box,
@@ -10,13 +10,15 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 
 import CartproductCard from "./CartproductCard";
 import EmptyCart from "./EmptyCart";
 import Footer from "../../component/layout/Footer";
 import CartHeader from "./CartHeader";
+import { emptyCart, setCartItem } from "../../redux/cart/cartSlice";
+import { setWishList } from "../../redux/wishlist/wishlistSlice";
 
 const Cart = () => {
   const { cartItem } = useSelector((state) => state.cart);
@@ -24,6 +26,26 @@ const Cart = () => {
   const subTotal = cartItem.reduce((a, b) => {
     return a + b.price * b.quantity;
   }, 0);
+  const dispatch = useDispatch()
+  // const location = useLocation()
+  // useEffect(()=>{
+  //   const queryParams = new URLSearchParams(location.search);
+    
+  //   const redirectStatus = queryParams.get('redirect_status');
+  //   if(redirectStatus==='succeeded'){
+  //     dispatch(emptyCart())
+  //     console.log('cart is going to be emptied')
+      
+
+  //   }else{
+  //     console.log('cart is not emptyed')
+  //   }
+
+    
+    
+
+  // },[location.search])
+ 
 
   return (
     <ClientLayout>

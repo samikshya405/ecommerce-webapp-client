@@ -7,6 +7,7 @@ export const cartSlice = createSlice({
     initialState,
     reducers:{
         setCartItem:(state, action)=>{
+            
             if(action.payload.selectedsize){
                 const product = state.cartItem.find(item=>item.id===action.payload.id && item.selectedsize===action.payload.selectedsize)
                 if(product){
@@ -32,10 +33,13 @@ export const cartSlice = createSlice({
 
             state.cartItem.splice(itemIndex, 1)
 
-        }
+        },
+        emptyCart: (state) => {
+            state.cartItem = []; // Reset cartItem to an empty array
+          }
 
         
     }
 })
-export const {setCartItem, deleteCartItem} = cartSlice.actions
+export const {setCartItem, deleteCartItem, emptyCart} = cartSlice.actions
 export default cartSlice.reducer

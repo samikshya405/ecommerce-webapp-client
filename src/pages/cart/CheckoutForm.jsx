@@ -17,11 +17,13 @@ import {
 } from "@mui/material";
 import CustomInput from "../../component/input/CustomInput";
 import CartproductCard from "./CartproductCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CheckoutProductcart from "./CheckoutProductCart";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import HttpsIcon from "@mui/icons-material/Https";
+import { setUserInfo } from "../../redux/auth/authSlice";
+import { setWishList } from "../../redux/wishlist/wishlistSlice";
 
 const inputs = [
   { name: "email", label: "Email", type: "email", required: true },
@@ -37,6 +39,7 @@ const CheckoutForm = () => {
   const clientSecret = import.meta.env.VITE_SECRET_KEY;
   const { cartItem } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
   const initialState = {
     email: userInfo.email,
     phone: userInfo.phone,
@@ -68,7 +71,7 @@ const CheckoutForm = () => {
       apiVersion: "2023-08-16",
     });
     const paymentIntent = await stripeInstance.paymentIntents.create({
-      amount: price  * 100,
+      amount: Math.round(price * 100),
       currency: "aud",
     });
 
@@ -78,12 +81,16 @@ const CheckoutForm = () => {
       elements,
       clientSecret: paymentIntentClientSecret,
       confirmParams: {
-        return_url: `${window.location.origin}/cart`,
+        return_url: `${window.location.origin}`,
       },
     });
 
     if (error) {
       setError(error.message);
+    }else{
+      console.log('payment succedded')
+      
+
     }
   };
 
