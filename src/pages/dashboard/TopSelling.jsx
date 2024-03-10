@@ -19,7 +19,7 @@ const TopSelling = () => {
         {
           productList.map((product) => {
             return (
-              <Grid item xs={6} sm={4} md={3} lg={3} xl={1} key={product.id}>
+              <Grid item xs={6} sm={4} md={3} lg={3} xl={3} key={product.id}>
                 <Paper sx={{ height: "100%" }}>
                   <ProductCard {...product} />
                 </Paper>
