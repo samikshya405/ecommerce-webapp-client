@@ -26,10 +26,10 @@ const Dashboard = () => {
   const location = useLocation()
   const isFirstRender = useRef(true);
   useEffect(()=>{
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    // }
     const queryParams = new URLSearchParams(location.search);
     
     const redirectStatus = queryParams.get('redirect_status');
