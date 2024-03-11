@@ -3,7 +3,7 @@ import React from 'react'
 const SuccessNotification = ({orderNumber}) => {
   return (
     <div style={{ textAlign: 'center' }}>
-      <h1>Payment Successful!</h1>
+      <h2>Payment Successful!</h2>
       <p>Your order number is: {orderNumber}</p>
     </div>
   )

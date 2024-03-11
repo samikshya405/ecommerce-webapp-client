@@ -27,6 +27,7 @@ export default function ProductCard({ id, image, productName, price, sizes }) {
   const handleAddToCart = (id, e) => {
     e.preventDefault();
     const itemToAdd = productList.find((item) => item.id == id);
+    // const {id:productId,category,subcategory,productName,}
 
     dispatch(setCartItem({ quantity: 1, ...itemToAdd }));
     toast.success(`${itemToAdd.productName} is added to your cart`, {

@@ -11,7 +11,12 @@ import Wishlist from "./pages/wishlist/Wishlist";
 import AllProductPage from "./pages/product/AllProductPage";
 import CategoryPage from "./pages/product/CategoryPage";
 import Checkout from "./pages/cart/Checkout";
-// import CartCheckOutForm from "./pages/cart/CartCheckOutForm";
+import PrivateRoute from "./privateRoute/PrivateRoute";
+import OrderHistory from "./pages/order/OrderHistory";
+import SubCategoryPage from "./pages/category/SubCategoryPage";
+// import OrderHistory from "./pages/order/OrderHistory";
+// import OrderHistory from "./pages/order/OrderHistory";
+
 
 const App = () => {
   return (
@@ -28,8 +33,12 @@ const App = () => {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/allProduct" element={<AllProductPage />} />
         <Route path="/category/:id" element={<CategoryPage/>}/>
+        <Route path='/subCategory/:id' element={<SubCategoryPage/>}/>
         <Route path='*' element={<Navigate to='/'/>}/>
-        <Route path="/checkout" element={<Checkout/>}/>
+       
+        <Route path="/checkout" element={<PrivateRoute><Checkout/></PrivateRoute>}/>
+        <Route path="/orderHistory" element={<OrderHistory/>}/>
+        
 
       </Routes>
     </>

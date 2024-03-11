@@ -42,6 +42,9 @@ const Header = () => {
   const handleSignin = () => {
     navigate("/login");
   };
+  const handleUser=()=>{
+    navigate('/orderHistory')
+  }
   const handleSignout = () => {
     signOut(auth)
       .then(() => {
@@ -102,7 +105,7 @@ const Header = () => {
               <Button
                 color="inherit"
                 sx={{ textTransform: "capitalize" }}
-                onClick={handleSignout}
+                onClick={handleUser}
               >
                 <PersonIcon />
                 signOut

@@ -13,6 +13,7 @@ import {
   Grid,
   IconButton,
   Input,
+  Paper,
   Stack,
   Typography,
 } from "@mui/material";
@@ -27,6 +28,8 @@ import { setWishList } from "../../redux/wishlist/wishlistSlice";
 import ProdImageCarousel from "../../component/product/ProdImageCarousel";
 import LatestArrival from "../../component/product/LatestArrival";
 import RelatedProduct from "../../component/product/RelatedProduct";
+import ReviewForm from "../../component/product/ReviewForm";
+import ProductReview from "../../component/product/ProductReview";
 
 
 const ProductPage = () => {
@@ -250,8 +253,26 @@ const ProductPage = () => {
               )}
             </div>
           </Grid>
+          
         </Grid>
-        <RelatedProduct category={selectedProduct.subcategory} />
+        <Typography variant="h4" pt={2}>Reviews</Typography>
+        <Grid container spacing={3} my={1}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <ReviewForm/>
+
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+          <Typography variant="h5" gutterBottom>
+        All Customers Review
+      </Typography>
+      <ProductReview/>
+
+          </Grid>
+
+        </Grid>
+        {/* <LatestArrival/> */}
+        
+        {/* <RelatedProduct id={selectedProduct.subcategory} /> */}
       </Container>
     </ClientLayout>
   );

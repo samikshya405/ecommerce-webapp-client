@@ -4,6 +4,7 @@ import "./categoryBar.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"; // Import your CSS file for styling
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getAllSubCategory,
   getCategoryAction,
   getCategorySubCollection,
 } from "../../redux/category/categoryAction";
@@ -13,7 +14,7 @@ import HoverDropdown from "./HoverDropdown";
 const CategoriesBar = ({ categories }) => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const dispatch = useDispatch();
-  const { selectedCategoryCollection } = useSelector((state) => state.category);
+  const {categoryList,subCategorylist } = useSelector((state) => state.category);
 
   const handleCategoryHover = (category) => {
     setHoveredCategory(category);
@@ -22,14 +23,20 @@ const CategoriesBar = ({ categories }) => {
   const handleMouseLeave = () => {
     setHoveredCategory(null);
   };
-  useEffect(() => {
-    if (hoveredCategory?.id) {
-      dispatch(getCategorySubCollection(hoveredCategory.id));
-    }
-  }, [hoveredCategory]);
+  
   useEffect(() => {
     dispatch(getCategoryAction());
+    
   }, []);
+  useEffect(() => {
+    if (categoryList) {
+      // Dispatch an action to fetch all subcategories based on categoryList
+
+      dispatch(getAllSubCategory(categoryList));
+    }
+  }, [categoryList]);
+  const subcatList = subCategorylist?.filter(cat=>hoveredCategory && cat.parentCatId ===hoveredCategory.id)
+
   return (
     <div className="categories-bar">
       <div className="categories-container">
@@ -48,9 +55,9 @@ const CategoriesBar = ({ categories }) => {
 
               {hoveredCategory && hoveredCategory.id === category.id && (
                 <Paper className="subcategory-container">
-                  {selectedCategoryCollection.map((subcategory) => (
-                    <Link to="" key={subcategory.id}>
-                      <div className="subcategory-item">
+                  {subcatList?.map((subcategory) => (
+                    <Link to={`/subCategory/${subcategory.name}`} key={subcategory.id}>
+                      <div className="subcategory-item" onClick={()=>setHoveredCategory(null)}>
                       <Paper
                         className="subcatImageWrapper"
                         

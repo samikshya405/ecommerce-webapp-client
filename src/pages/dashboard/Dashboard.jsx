@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import Header from '../../component/layout/Header'
 
 import LatestArrival from '../../component/product/LatestArrival'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getProductAction } from '../../redux/product/productAction'
 import BannerOne from './BannerOne'
 import TopSelling from './TopSelling'
@@ -15,6 +15,7 @@ import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { emptyCart } from '../../redux/cart/cartSlice'
 import SuccessNotification from '../cart/SuccessNotification'
+import { getOrderHistory, sendOrder } from '../order/orderAction'
 
 
 
@@ -22,18 +23,40 @@ import SuccessNotification from '../cart/SuccessNotification'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
+  const {cartItem} = useSelector(state=>state.cart)
+  const {userInfo} = useSelector(state=>state.auth)
+  const totalPrice = cartItem.reduce((a, b) => {
+    return a + b.price * b.quantity;
+  }, 0) + 2.98
 
   const location = useLocation()
-  const isFirstRender = useRef(true);
   useEffect(()=>{
-    // if (isFirstRender.current) {
-    //   isFirstRender.current = false;
-    //   return;
-    // }
+    
     const queryParams = new URLSearchParams(location.search);
     
     const redirectStatus = queryParams.get('redirect_status');
     if(redirectStatus==='succeeded'){
+      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+
+        const timestamp = Date.now().toString();
+       
+        
+        
+      if(cartItem.length>0){
+        const docData ={
+          userId :userInfo.uid,
+          status:'processing',
+          orderDetails:cartItem,
+          totalPrice,
+          orderNumber:timestamp,
+          orderDate:Date.now()
+          
+        }
+        dispatch(sendOrder(docData))
+        
+      }
+
       dispatch(emptyCart())
       console.log('cart is going to be emptied')
       toast.success(<SuccessNotification orderNumber={'123243434344'} />, {
@@ -51,8 +74,11 @@ const Dashboard = () => {
   },[])
   useEffect(()=>{
     dispatch(getProductAction())
+   dispatch(getOrderHistory(userInfo.uid))
+   console.log(userInfo.uid)
 
   },[dispatch])
+  
   return (
     <>
     <ClientLayout>

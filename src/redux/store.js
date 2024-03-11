@@ -6,6 +6,7 @@ import wishlistReducer  from './wishlist/wishlistSlice'
 import storage from 'redux-persist/lib/storage'; 
 import persistReducer from 'redux-persist/es/persistReducer'
 import categoryReducer from './category/categorySlice'
+import orderReducer from './orderSlice'
 
 const persistConfig = {
     key: 'root',
@@ -20,7 +21,8 @@ export const store = configureStore({
         product:productReducer,
         cart:persistedCartReducer,
         wishList:perisitedWishlistReducer,
-        category:categoryReducer
+        category:categoryReducer,
+        order:orderReducer
         
 
     }
