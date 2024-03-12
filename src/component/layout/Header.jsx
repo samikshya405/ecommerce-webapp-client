@@ -5,6 +5,8 @@ import {
   Button,
   Container,
   IconButton,
+  Menu,
+  MenuItem,
   Stack,
   Toolbar,
 } from "@mui/material";
@@ -22,6 +24,8 @@ import { auth } from "../../firebase";
 import { setUserInfo } from "../../redux/auth/authSlice";
 import { toast } from "react-toastify";
 import CategoriesBar from "../categories/CategoriesBar";
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { getCategoryAction } from "../../redux/category/categoryAction";
 
 const Header = () => {
@@ -53,6 +57,35 @@ const Header = () => {
       .catch((error) => {
         toast.error(error.message);
       });
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSignOut = () => {
+    // Implement sign out functionality
+    signOut(auth)
+      .then(() => {
+        dispatch(setUserInfo({}));
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+      handleClose();
+  };
+
+  const handleOrderHistory = () => {
+    // Implement order history functionality
+    navigate('/orderHistory')
+    handleClose();
   };
 
   return (
@@ -105,10 +138,13 @@ const Header = () => {
               <Button
                 color="inherit"
                 sx={{ textTransform: "capitalize" }}
-                onClick={handleUser}
+                onClick={handleMenu}
+                aria-controls="menu-appbar"
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
               >
-                <PersonIcon />
-                signOut
+                <AccountCircleIcon/>
+                
               </Button>
             ) : (
               <Button
@@ -120,6 +156,24 @@ const Header = () => {
                 login/signup
               </Button>
             )}
+             <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleOrderHistory}>Order History</MenuItem>
+          <MenuItem onClick={handleSignOut}><LogoutIcon /> Sign out</MenuItem>
+        </Menu>
           </Stack>
         </Toolbar>
         <CategoriesBar categories={categoryList} />
