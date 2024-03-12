@@ -30,6 +30,7 @@ import LatestArrival from "../../component/product/LatestArrival";
 import RelatedProduct from "../../component/product/RelatedProduct";
 import ReviewForm from "../../component/product/ReviewForm";
 import ProductReview from "../../component/product/ProductReview";
+import ProductGrid from "../../component/product/ProductGrid";
 
 
 const ProductPage = () => {
@@ -42,6 +43,7 @@ const ProductPage = () => {
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedProduct, setSelectedProduct] = useState('')
   const [selectedImage, setselecetedImage] = useState(selectedProduct.image)
+  const [recommended, setrecommended] = useState([])
 
   useEffect(() => {
    
@@ -63,6 +65,10 @@ const ProductPage = () => {
   const handleImageChange=(image)=>{
     setselecetedImage(image)
   }
+  useEffect(()=>{
+    setrecommended(productList.filter(item=>item.subcategory===selectedProduct.subcategory && item.id!=selectedProduct.id))
+
+  },[selectedProduct])
   
   const handleAddToCart = (product, size) => {
     const productDetails = {
@@ -108,7 +114,7 @@ const ProductPage = () => {
 
   return (
     <ClientLayout>
-      <Container maxWidth="lg" >
+      <Container maxWidth="lg"  >
         
         <Grid
           container 
@@ -255,24 +261,16 @@ const ProductPage = () => {
           </Grid>
           
         </Grid>
-        <Typography variant="h4" pt={2}>Reviews</Typography>
+        <Typography variant="h4" pt={4}>Reviews</Typography>
         <Grid container spacing={3} my={1}>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <ReviewForm/>
-
-          </Grid>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-          <Typography variant="h5" gutterBottom>
-        All Customers Review
-      </Typography>
-      <ProductReview/>
-
-          </Grid>
+        
+        <ReviewForm selectedProduct={selectedProduct}/>
+        
 
         </Grid>
-        {/* <LatestArrival/> */}
-        
-        {/* <RelatedProduct id={selectedProduct.subcategory} /> */}
+        <Box pt={5}>
+        <ProductGrid title={'You may like'} productList={recommended}/>
+        </Box>
       </Container>
     </ClientLayout>
   );

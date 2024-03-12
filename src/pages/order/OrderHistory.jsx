@@ -6,11 +6,13 @@ import CheckoutProductcart from "../cart/CheckoutProductCart";
 import OrderProductCard from "./OrderProductCard";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { getOrderHistory } from "./orderAction";
+import { Link, useNavigate } from "react-router-dom";
 
 const OrderHistory = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { orderHistory } = useSelector((state) => state.order);
+  const navigate =useNavigate()
 
   const orderArray = [...orderHistory];
 
@@ -82,7 +84,10 @@ const OrderHistory = () => {
                         {item.status}
                       </Typography>
                     </div>
-                    <Button >View Order Details</Button>
+                    
+                    <Button >View order details</Button>
+                   
+                    
                   </Box>
                 </Paper>
               </div>

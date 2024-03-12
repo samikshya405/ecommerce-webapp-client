@@ -7,6 +7,7 @@ import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer'
 import categoryReducer from './category/categorySlice'
 import orderReducer from './orderSlice'
+import reviewReducer from './review/reviewSlice'
 
 const persistConfig = {
     key: 'root',
@@ -22,7 +23,8 @@ export const store = configureStore({
         cart:persistedCartReducer,
         wishList:perisitedWishlistReducer,
         category:categoryReducer,
-        order:orderReducer
+        order:orderReducer,
+        review:reviewReducer
         
 
     }
